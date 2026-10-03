@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "serve:static": "node scripts/serve-static.mjs",
+    "preview": "next build && node scripts/serve-static.mjs",
     "lint": "eslint .",
     "typecheck": "next typegen && tsc --noEmit",
     "e2e": "playwright test",

@@ -44,3 +44,23 @@ test('recipe safety renders the status the backend returned', async ({ page }) =
   await page.goto('/recipes/42');
   await expect(page.getByRole('status')).toHaveAttribute('data-safety-status', 'conflict');
 });
+
+test('dynamic routes read the real id from the URL on a full page load', async ({ page }) => {
+  await page.goto('/recipes/42');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Recipe 42');
+});
+
+test('client-side navigation onto a dynamic route shows the real id', async ({ page }) => {
+  await page.goto('/home');
+  await page
+    .getByRole('navigation', { name: 'Main' })
+    .getByRole('link', { name: 'Meal Party' })
+    .click();
+  await expect(page).toHaveURL(/\/party\/demo\/?$/);
+  await expect(page.getByText('Party demo')).toBeVisible();
+});
+
+test('unknown paths render the 404 page', async ({ page }) => {
+  await page.goto('/definitely-not-a-page');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Page not found');
+});

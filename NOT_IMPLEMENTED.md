@@ -92,7 +92,12 @@ The current state is the foundation only: a monorepo, routing skeleton, provider
 
 - [ ] CI pipeline: lint, typecheck, unit/component tests, Playwright smoke, bundle-size check, Storybook build.
 - [ ] Preview deployments per PR.
-- [ ] Hosting target (HLD open question) and environment config for staging/production API URLs.
+- [x] ~~Hosting target~~: static SPA on S3 + CloudFront, IP-allowlisted (see DEPLOY.md).
+- [ ] **SSR deviation from the HLD.** The static export drops server rendering, which the HLD wanted for public and share pages (SEO, fast first paint). Revisit before public launch: options are pre-rendering known public pages at build time, or moving to a Next.js server host.
+- [ ] Separate staging/production stacks, and per-environment `NEXT_PUBLIC_API_BASE_URL` at build time.
+- [ ] Deploy from CI with an OIDC role instead of local credentials.
+- [ ] Custom domain (Route 53 + ACM certificate in us-east-1).
+- [ ] The allowlist only protects the web app. The backend API will need its own access control and cost limits.
 - [ ] Feature flags for the BRD's phased rollout.
 
 ## BRD product features (all pending)

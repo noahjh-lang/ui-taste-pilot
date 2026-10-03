@@ -4,7 +4,8 @@
   "type": "module",
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/*",
+    "infra"
   ],
   "engines": {
     "node": ">=22"
@@ -12,14 +13,17 @@
   "scripts": {
     "dev": "npm run dev -w @tastepilot/web",
     "build": "npm run build -w @tastepilot/web",
-    "start": "npm run start -w @tastepilot/web",
+    "preview": "npm run preview -w @tastepilot/web",
     "lint": "npm run lint -w @tastepilot/web",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "test": "vitest run",
     "test:watch": "vitest",
     "e2e": "npm run e2e -w @tastepilot/web",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "deploy": "npm run build && npm run deploy -w @tastepilot/infra",
+    "deploy:diff": "npm run build && npm run diff -w @tastepilot/infra",
+    "deploy:destroy": "npm run destroy -w @tastepilot/infra"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.2",
