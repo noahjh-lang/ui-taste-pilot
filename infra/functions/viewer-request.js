@@ -9,6 +9,7 @@
 
 var DYNAMIC_PREFIXES = ['recipes', 'party', 'r', 'c', 'invite'];
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- invoked by the CloudFront runtime
 function handler(event) {
   var request = event.request;
   var parts = request.uri.split('/');

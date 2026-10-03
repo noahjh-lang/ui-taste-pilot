@@ -10,7 +10,12 @@ const nextConfig: NextConfig = {
   output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
   trailingSlash: true,
   // Workspace packages ship TypeScript source; Next compiles them in place.
-  transpilePackages: ['@tastepilot/ui', '@tastepilot/api-client', '@tastepilot/shared'],
+  transpilePackages: [
+    '@tastepilot/ui',
+    '@tastepilot/api-client',
+    '@tastepilot/shared',
+    '@tastepilot/mock-api',
+  ],
   turbopack: {
     root: path.join(__dirname, '../..'),
   },

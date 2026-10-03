@@ -1,8 +1,8 @@
 import { staticParams } from '@/lib/static-params';
-import { PublicRecipeView } from './view';
+import { PublicRecipePage as View } from './view';
 
 export const generateStaticParams = () => staticParams('id');
 
-export default function PublicRecipePage() {
-  return <PublicRecipeView />;
+export default function Page() {
+  return <View />;
 }

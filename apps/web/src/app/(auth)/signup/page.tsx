@@ -1,11 +1,12 @@
-import { PageHeader } from '@/components/page-header';
-import { Placeholder } from '@/components/placeholder';
+import { SignupForm } from '@/features/auth';
+
+export const metadata = { title: 'Create your account' };
 
 export default function SignupPage() {
   return (
     <>
-      <PageHeader title="Create your account" />
-      <Placeholder feature="Full-account sign-up" />
+      <h1 className="mb-6 text-2xl font-semibold">Create your account</h1>
+      <SignupForm />
     </>
   );
 }

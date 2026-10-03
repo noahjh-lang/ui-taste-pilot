@@ -12,6 +12,7 @@ Node 24 LTS (see `.nvmrc`). With nvm: `nvm use`.
 npm install
 cp apps/web/.env.example apps/web/.env.local   # set NEXT_PUBLIC_API_BASE_URL
 npm run dev                                     # http://localhost:3000 (hot reload via Turbopack)
+# Log in as alex@tastepilot.dev / tastepilot (stub backend, no server needed)
 ```
 
 ## Scripts (run from the repo root)
@@ -27,6 +28,8 @@ npm run dev                                     # http://localhost:3000 (hot rel
 | `npm run typecheck` | `tsc --noEmit` in every workspace |
 | `npm run lint` | ESLint (Next.js config) |
 | `npm run format` | Prettier |
+| `npm run storybook` | Design system in Storybook |
+| `npm run check:bundle` | Bundle-size budget (after a build) |
 
 ## Layout
 
@@ -41,6 +44,7 @@ apps/web/                 Next.js App Router app
 packages/ui/              Design system (primitives, SafetyBadge)
 packages/api-client/      Typed fetch client + Zod schemas mirrored from the backend
 packages/shared/          Framework-agnostic types and display logic
+packages/mock-api/        Stub backend (MSW): safety engine, NL parsing, ranking, parties… see LOCAL_DEV.md
 infra/                    AWS CDK: S3 + CloudFront + WAF allowlist + budget; CloudFront Function
 ```
 

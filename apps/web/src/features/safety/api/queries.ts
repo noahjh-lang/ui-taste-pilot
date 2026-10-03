@@ -1,15 +1,13 @@
-import { safetyResultSchema } from '@tastepilot/api-client';
+'use client';
+
 import { useQuery } from '@tanstack/react-query';
 import { api } from '@/lib/api';
-import { safetyKeys } from './keys';
+import { queryKeys } from '@/lib/query-keys';
 
-export function useRecipeSafety(recipeId: string) {
+/** Safety for one recipe, keyed per user so it can never leak across accounts. */
+export function useRecipeSafety(userId: string, recipeId: string) {
   return useQuery({
-    queryKey: safetyKeys.recipe(recipeId),
-    queryFn: ({ signal }) =>
-      api.request(`/recipes/${encodeURIComponent(recipeId)}/safety`, {
-        schema: safetyResultSchema,
-        signal,
-      }),
+    queryKey: queryKeys.recipeSafety(userId, recipeId),
+    queryFn: ({ signal }) => api.recipes.safety(recipeId, signal),
   });
 }

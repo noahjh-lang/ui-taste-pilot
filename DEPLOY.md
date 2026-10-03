@@ -2,6 +2,8 @@
 
 The web app ships as a static SPA: private **S3** bucket → **CloudFront** → your browser. Everything is defined in [infra/](infra/) with AWS CDK (TypeScript).
 
+> **Stub backend in the deployed build:** while `NEXT_PUBLIC_API_MOCKING=enabled` (set in `apps/web/.env.local`), the deployed site runs the stub backend in each visitor's browser. Every visitor gets their own seeded demo data in their own `localStorage`, and nothing is shared between them. Set it to `disabled` and point `NEXT_PUBLIC_API_BASE_URL` at a real API before using real data.
+
 ## How costs are protected
 
 | Layer | What it does |
