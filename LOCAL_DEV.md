@@ -72,17 +72,19 @@ Before your first e2e run, install the test browser once:
 cd apps/web && npx playwright install chromium
 ```
 
-`npm run e2e` uses your dev server if it's already running and starts one otherwise. For an interactive runner, use `npm run e2e:ui -w @tastepilot/web`.
+`npm run e2e` builds the static export and serves it on http://localhost:3001 through the same CloudFront rewrite used in production, so it tests what actually gets deployed. If something is already serving on 3001, it reuses that instead, so stop any old `npm run preview` first to avoid testing a stale build. For an interactive runner, use `npm run e2e:ui -w @tastepilot/web`.
 
 Before pushing, run `npm run typecheck && npm run lint && npm test && npm run e2e`.
 
 ## 6. Production build (optional)
 
 ```sh
-npm run build && npm start
+npm run preview   # http://localhost:3001
 ```
 
-This catches errors the dev server tolerates, such as build-time type errors and prerendering failures.
+This builds the static export (`apps/web/out`) and serves it the way S3 + CloudFront will. It catches problems the dev server tolerates, such as build-time type errors, prerendering failures, and dynamic-route issues. To deploy, see [DEPLOY.md](DEPLOY.md).
+
+**Dynamic routes** (`/recipes/[id]` and similar): read the id with `useRouteParam('recipes')`, not `useParams()`. In the deployed build `useParams()` returns the `_` placeholder. [DEPLOY.md](DEPLOY.md#how-spa-routing-works-on-s3) explains why.
 
 ## Where things go
 
@@ -95,6 +97,7 @@ This catches errors the dev server tolerates, such as build-time type errors and
 | Framework-free logic or types | `packages/shared/src/` |
 | A unit test | Next to the file, as `*.test.ts(x)` |
 | A browser test | `apps/web/e2e/*.spec.ts` |
+| AWS infrastructure | `infra/lib/web-stack.ts` (see [DEPLOY.md](DEPLOY.md)) |
 
 Features must not import from each other. Shared code goes in `packages/*`. See the [HLD](hld-ui-taste-pilot.md) for the reasoning.
 

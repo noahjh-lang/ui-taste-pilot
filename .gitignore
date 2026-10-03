@@ -7,14 +7,37 @@ coverage/
 *.tsbuildinfo
 next-env.d.ts
 
-# env
-.env*.local
-.env
-
 # playwright
 test-results/
 playwright-report/
 playwright/.cache/
 
+# AWS CDK build output (contains the built site and resolved stack templates)
+cdk.out/
+
 .DS_Store
 *.log
+
+# ---------------------------------------------------------------------------
+# Personal details, credentials, and account-specific files: never commit.
+# ---------------------------------------------------------------------------
+
+# Environment files (only the committed example is allowed)
+.env
+.env.*
+!.env.example
+
+# Deploy settings: your IP allowlist and alert email (copy config.example.json)
+infra/config.json
+# CDK context cache: records your AWS account id and lookups
+cdk.context.json
+
+# Local credentials of any kind
+creds/
+.aws/
+*.pem
+*.key
+*.p12
+*.pfx
+.npmrc
+.netrc

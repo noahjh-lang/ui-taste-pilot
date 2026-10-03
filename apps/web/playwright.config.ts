@@ -1,6 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const PORT = Number(process.env.PORT ?? 3000);
+// E2E runs against the static export, served through the real CloudFront
+// rewrite function -- i.e. what actually gets deployed.
+const PORT = Number(process.env.PORT ?? 3001);
 
 export default defineConfig({
   testDir: './e2e',
@@ -17,9 +19,10 @@ export default defineConfig({
     { name: 'mobile', use: { ...devices['Pixel 7'] } },
   ],
   webServer: {
-    command: 'npm run dev',
+    command: 'npm run build && npm run serve:static',
+    env: { PORT: String(PORT) },
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
+    timeout: 180_000,
   },
 });
