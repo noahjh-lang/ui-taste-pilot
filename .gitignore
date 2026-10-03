@@ -14,6 +14,7 @@ playwright/.cache/
 
 # AWS CDK build output (contains the built site and resolved stack templates)
 cdk.out/
+storybook-static/
 
 .DS_Store
 *.log

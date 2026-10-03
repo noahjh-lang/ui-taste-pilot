@@ -1,13 +1,9 @@
-import { PageHeader } from '@/components/page-header';
-import { Placeholder } from '@/components/placeholder';
+'use client';
 
-export const metadata = { title: 'Home' };
+import { HomeFeedView } from '@/features/recipes';
+import { useMe } from '@/lib/session';
 
 export default function HomePage() {
-  return (
-    <>
-      <PageHeader title="Home" description="Your personalized feed" />
-      <Placeholder feature="Home" />
-    </>
-  );
+  const me = useMe();
+  return <HomeFeedView name={me.name} />;
 }

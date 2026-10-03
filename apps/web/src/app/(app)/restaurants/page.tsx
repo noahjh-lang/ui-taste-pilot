@@ -1,13 +1,7 @@
-import { PageHeader } from '@/components/page-header';
-import { Placeholder } from '@/components/placeholder';
+import { RestaurantsView } from '@/features/restaurants';
 
 export const metadata = { title: 'Restaurants' };
 
-export default function RestaurantsPage() {
-  return (
-    <>
-      <PageHeader title="Restaurants" description="Restaurant recommendations" />
-      <Placeholder feature="Restaurants" />
-    </>
-  );
+export default function Page() {
+  return <RestaurantsView />;
 }

@@ -6,3 +6,5 @@ test-results
 *.md
 out
 cdk.out
+storybook-static
+apps/web/public/mockServiceWorker.js

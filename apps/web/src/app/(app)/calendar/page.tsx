@@ -1,13 +1,7 @@
-import { PageHeader } from '@/components/page-header';
-import { Placeholder } from '@/components/placeholder';
+import { CalendarView } from '@/features/calendar';
 
 export const metadata = { title: 'Calendar' };
 
-export default function CalendarPage() {
-  return (
-    <>
-      <PageHeader title="Calendar" description="Family meal calendar" />
-      <Placeholder feature="Calendar" />
-    </>
-  );
+export default function Page() {
+  return <CalendarView />;
 }

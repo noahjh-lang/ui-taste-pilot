@@ -1,0 +1,69 @@
+/*
+ * TastePilot design tokens, shared by the web app and Storybook.
+ * Import after `@import 'tailwindcss'`.
+ */
+
+/* Class-based dark mode: add `dark` to <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * PLACEHOLDER palette. Swap in the product's agreed palette and safety-state
+ * colors. Red / amber / green are reserved for safety states only -- never use
+ * them for brand or decoration.
+ */
+:root {
+  --background: #faf8f5;
+  --surface: #ffffff;
+  --foreground: #2b2622;
+  --muted: #f1ede7;
+  --muted-foreground: #6f665d;
+  --border: #e3ddd4;
+  --brand: #9a5b2e;
+  --brand-foreground: #ffffff;
+
+  --safety-safe-bg: #e7f4ea;
+  --safety-safe-fg: #1d6b32;
+  --safety-conflict-bg: #fbe9e7;
+  --safety-conflict-fg: #a8231a;
+  --safety-unverified-bg: #fdf3dc;
+  --safety-unverified-fg: #8a5a00;
+}
+
+.dark {
+  --background: #1a1714;
+  --surface: #23201c;
+  --foreground: #f3eee8;
+  --muted: #2e2a25;
+  --muted-foreground: #b3a99e;
+  --border: #3a352f;
+  --brand: #d08a55;
+  --brand-foreground: #1a1714;
+
+  /* Contrast-check these separately; do not just inherit light values. */
+  --safety-safe-bg: #15301c;
+  --safety-safe-fg: #8fdba3;
+  --safety-conflict-bg: #3b1513;
+  --safety-conflict-fg: #ffa59c;
+  --safety-unverified-bg: #352812;
+  --safety-unverified-fg: #f5c565;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+
+  --color-safety-safe-bg: var(--safety-safe-bg);
+  --color-safety-safe-fg: var(--safety-safe-fg);
+  --color-safety-conflict-bg: var(--safety-conflict-bg);
+  --color-safety-conflict-fg: var(--safety-conflict-fg);
+  --color-safety-unverified-bg: var(--safety-unverified-bg);
+  --color-safety-unverified-fg: var(--safety-unverified-fg);
+
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}

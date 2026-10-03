@@ -7,7 +7,7 @@ const STYLES: Record<SafetyStatus, string> = {
   unverified: 'bg-safety-unverified-bg text-safety-unverified-fg border-safety-unverified-fg/30',
 };
 
-function SafetyIcon({ status }: { status: SafetyStatus }) {
+export function SafetyIcon({ status, className }: { status: SafetyStatus; className?: string }) {
   const common = {
     width: 14,
     height: 14,
@@ -18,6 +18,7 @@ function SafetyIcon({ status }: { status: SafetyStatus }) {
     strokeLinecap: 'round' as const,
     strokeLinejoin: 'round' as const,
     'aria-hidden': true,
+    className,
   };
   switch (status) {
     case 'safe':
@@ -52,14 +53,26 @@ export interface SafetyBadgeProps {
   error?: boolean;
   /** Shown as a retry affordance when `error` is true. */
   onRetry?: () => void;
+  /** Override the text label, e.g. "Safe for everyone". */
+  label?: string;
+  size?: 'sm' | 'md';
   className?: string;
 }
 
 /**
  * The single shared safety display. Never re-implement this per feature.
- * Missing, loading, or failed results always render as `unverified`.
+ * Missing, loading, or failed results always render as `unverified`, with an
+ * icon and a text label so the state never relies on color alone.
  */
-export function SafetyBadge({ status, pending, error, onRetry, className }: SafetyBadgeProps) {
+export function SafetyBadge({
+  status,
+  pending,
+  error,
+  onRetry,
+  label,
+  size = 'md',
+  className,
+}: SafetyBadgeProps) {
   const resolved = resolveSafetyStatus(status, { pending, error });
   const display = getSafetyDisplay(resolved);
 
@@ -70,13 +83,15 @@ export function SafetyBadge({ status, pending, error, onRetry, className }: Safe
         data-safety-status={resolved}
         title={display.description}
         className={cn(
-          'inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-semibold',
+          'inline-flex items-center gap-1.5 rounded-full border font-semibold whitespace-nowrap',
+          size === 'md' ? 'px-2.5 py-0.5 text-xs' : 'px-2 py-px text-[11px]',
           STYLES[resolved],
         )}
       >
         <SafetyIcon status={resolved} />
-        {display.label}
+        {label && resolved === status && !pending && !error ? label : display.label}
         {pending && <span className="sr-only">(checking)</span>}
+        {error && <span className="sr-only">(safety check failed)</span>}
       </span>
       {error && onRetry && (
         <button

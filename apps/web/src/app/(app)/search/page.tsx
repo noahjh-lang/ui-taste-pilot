@@ -1,13 +1,12 @@
-import { PageHeader } from '@/components/page-header';
-import { Placeholder } from '@/components/placeholder';
+import { Suspense } from 'react';
+import { SearchView } from '@/features/recipes';
 
 export const metadata = { title: 'Search' };
 
 export default function SearchPage() {
   return (
-    <>
-      <PageHeader title="Search" description="Search ranked by your taste" />
-      <Placeholder feature="Search" />
-    </>
+    <Suspense>
+      <SearchView />
+    </Suspense>
   );
 }
